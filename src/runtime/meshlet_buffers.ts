@@ -32,3 +32,11 @@ export class MeshletBuffers {
     return buffer;
   }
 }
+
+export function createStagingReadbackBuffer(device: GPUDevice, size: number): GPUBuffer {
+  return device.createBuffer({
+    label: 'meshlet_staging_readback',
+    size,
+    usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST,
+  });
+}
