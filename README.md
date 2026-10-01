@@ -1,6 +1,7 @@
 # ⚡ meshlet-culling-wgsl
 
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-WebGPU%20Visualizer-00f0ff.svg)](https://nff747.github.io/meshlet-culling-wgsl/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-WGSL-blue.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
