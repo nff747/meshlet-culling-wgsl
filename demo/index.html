@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meshlet Culling WebGPU — GPU-Driven Multi-Draw Visualizer</title>
+  <style>
+    :root {
+      --bg: #07090e;
+      --card: #0f141f;
+      --accent: #00f0ff;
+      --accent-dim: rgba(0, 240, 255, 0.2);
+      --text: #f0f6fc;
+      --border: #21262d;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 320px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #canvas-container {
+      flex: 1;
+      position: relative;
+    }
+    canvas { width: 100%; height: 100%; display: block; }
+    h1 { margin: 0; font-size: 20px; color: var(--accent); }
+    .stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .stat-val { font-weight: bold; color: var(--accent); }
+    button {
+      background: var(--accent); color: #000; border: none; padding: 10px;
+      border-radius: 4px; font-weight: bold; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h1>⚡ Meshlet Culling</h1>
+    <p style="font-size: 13px; color: #8b949e;">GPU-Driven Cluster Frustum & Normal Cone Culling with Indirect Multi-Draw.</p>
+
+    <div class="stat"><span>Total Meshlets:</span><span class="stat-val" id="stat-total">1,568</span></div>
+    <div class="stat"><span>Visible Meshlets:</span><span class="stat-val" id="stat-visible">392</span></div>
+    <div class="stat"><span>Frustum Culled:</span><span class="stat-val" id="stat-frustum">896</span></div>
+    <div class="stat"><span>Normal Cone Culled:</span><span class="stat-val" id="stat-cone">280</span></div>
+    <div class="stat"><span>Culling Efficiency:</span><span class="stat-val" id="stat-ratio">75.0%</span></div>
+
+    <button id="btn-toggle-camera">Orbit Camera</button>
+  </div>
+  <div id="canvas-container">
+    <canvas id="gpu-canvas"></canvas>
+  </div>
+
+  <script type="module" src="visualizer.ts"></script>
+</body>
+</html>
