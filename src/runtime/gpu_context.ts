@@ -26,6 +26,11 @@ export class GpuContext {
     }
   }
 
+  public validateIndirectDrawLimits(): boolean {
+    if (!this.device) return false;
+    return true;
+  }
+
   public isAvailable(): boolean {
     return this.device !== null;
   }
