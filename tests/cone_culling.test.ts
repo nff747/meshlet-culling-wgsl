@@ -19,4 +19,14 @@ describe('Normal Cone Backface Culling', () => {
     // Camera behind at -Z -> culled
     expect(isClusterFacingCamera(cone, { x: 0, y: 0, z: -10 })).toBe(false);
   });
+
+  it('handles edge-on viewing within cone tolerance', () => {
+    const cone = {
+      apex: { x: 0, y: 0, z: 0 },
+      axis: { x: 0, y: 1, z: 0 },
+      angle: Math.PI / 4,
+      cutoff: -Math.sin(Math.PI / 4),
+    };
+    expect(isClusterFacingCamera(cone, { x: 10, y: 0, z: 0 })).toBe(true);
+  });
 });
