@@ -16,4 +16,10 @@ describe('ShaderBuilder', () => {
     expect(wgsl).toContain('@fragment');
     expect(wgsl).toContain('hash_color');
   });
+
+  it('ensures atomic binding signatures exist in compute shader', () => {
+    const wgsl = ShaderBuilder.getCullingShader();
+    expect(wgsl).toContain('@group(0) @binding(2)');
+    expect(wgsl).toContain('DrawIndirectArgs');
+  });
 });
