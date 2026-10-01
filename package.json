@@ -1,0 +1,44 @@
+{
+  "name": "meshlet-culling-wgsl",
+  "version": "1.0.0",
+  "description": "⚡ GPU-Driven Meshlet Cluster Culling, Normal Cone Filtering & Indirect Multi-Draw Engine in WebGPU / WGSL",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "bench": "npx tsx scripts/benchmark.ts"
+  },
+  "keywords": [
+    "webgpu",
+    "wgsl",
+    "meshlet",
+    "nanite",
+    "cluster-culling",
+    "frustum-culling",
+    "cone-culling",
+    "gpu-driven-rendering",
+    "indirect-draw",
+    "threejs",
+    "compute-shader"
+  ],
+  "author": "nff747 <nff747@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nff747/meshlet-culling-wgsl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nff747/meshlet-culling-wgsl/issues"
+  },
+  "homepage": "https://github.com/nff747/meshlet-culling-wgsl#readme",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@webgpu/types": "^0.1.50",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}
