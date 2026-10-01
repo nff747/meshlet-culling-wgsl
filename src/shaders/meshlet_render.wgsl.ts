@@ -23,7 +23,8 @@ struct VertexOutput {
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 
 // Hash function to assign unique neon colors to each cluster ID
-// Vibrant neon cluster palette\nfn hash_color(id: u32) -> vec3<f32> {
+// Vibrant neon cluster palette
+fn hash_color(id: u32) -> vec3<f32> {
   let r = fract(sin(f32(id) * 12.9898) * 43758.5453);
   let g = fract(sin(f32(id) * 78.233) * 43758.5453);
   let b = fract(sin(f32(id) * 45.164) * 43758.5453);

@@ -51,7 +51,8 @@ fn main(@builtin(global_invocation_id) global_id: vec3<u32>) {
   let center = vec3<f32>(m.center_x, m.center_y, m.center_z);
   let radius = m.radius;
 
-  // Early-exit bounds test\n  // 1. 6-Plane Frustum Culling
+  // Early-exit bounds test
+  // 1. 6-Plane Frustum Culling
   for (var i = 0u; i < 6u; i++) {
     let plane = camera.frustum_planes[i];
     let dist = dot(plane.xyz, center) + plane.w;

@@ -16,7 +16,8 @@ export function isClusterFacingCamera(cone: NormalCone, cameraPos: Vec3): boolea
   const len = Math.sqrt(viewDir.x * viewDir.x + viewDir.y * viewDir.y + viewDir.z * viewDir.z);
   if (len < 1e-6) return true; // Inside cluster apex
 
-  // Fast inverse length\n  const invLen = 1.0 / len;
+  // Fast inverse length
+  const invLen = 1.0 / len;
   const nx = viewDir.x * invLen;
   const ny = viewDir.y * invLen;
   const nz = viewDir.z * invLen;

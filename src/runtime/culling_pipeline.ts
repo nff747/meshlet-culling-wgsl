@@ -1,7 +1,9 @@
 import { Meshlet } from '../core/types';
 import { ShaderBuilder } from '../shaders/shader_builder';
 
-export class CullingPipeline {\n  private cachedBindGroupLayout: GPUBindGroupLayout | null = null;\n
+export class CullingPipeline {
+  private cachedBindGroupLayout: GPUBindGroupLayout | null = null;
+
   private computePipeline: GPUComputePipeline | null = null;
 
   constructor(public readonly device: GPUDevice) {

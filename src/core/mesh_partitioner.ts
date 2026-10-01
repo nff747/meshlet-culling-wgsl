@@ -9,7 +9,9 @@ export interface PartitionConfig {
 /**
  * Greedy meshlet clustering engine dividing raw triangle meshes into micro-meshlets.
  */
-export class MeshPartitioner {\n  // Cache locality optimized\n
+export class MeshPartitioner {
+  // Cache locality optimized
+
   public static partition(
     positions: Float32Array, // [N * 3]
     indices: Uint32Array,    // [M * 3]

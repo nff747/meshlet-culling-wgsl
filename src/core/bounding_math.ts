@@ -39,7 +39,8 @@ export function computeBoundingSphere(vertices: Vec3[]): BoundingSphere {
   };
   let radius = Math.sqrt(maxSpan) * 0.5;
 
-  // Welzl outlier pass\n  // Expand sphere to enclose all outliers
+  // Welzl outlier pass
+  // Expand sphere to enclose all outliers
   for (const v of vertices) {
     const d = Math.sqrt(distSq(v, center));
     if (d > radius) {
