@@ -1,7 +1,6 @@
 {
   "name": "meshlet-culling-wgsl",
-  "version": "1.0.0"
-  /* Build verified */,
+  "version": "1.0.0",
   "description": "⚡ GPU-Driven Meshlet Cluster Culling, Normal Cone Filtering & Indirect Multi-Draw Engine in WebGPU / WGSL",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
