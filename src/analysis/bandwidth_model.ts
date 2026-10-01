@@ -15,3 +15,8 @@ export class BandwidthModel {
     return { standardTrafficBytes, meshletTrafficBytes, bandwidthSavedBytes };
   }
 }
+
+export function estimatePcieTransferTimeMs(bytes: number, busSpeedGbps: number = 32): number {
+  const bytesPerMs = (busSpeedGbps * 1e9) / 8 / 1000;
+  return bytes / bytesPerMs;
+}
