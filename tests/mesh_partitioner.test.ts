@@ -40,4 +40,12 @@ describe('MeshPartitioner', () => {
     // Verify all 200 triangles are preserved
     expect(meshletTriangleIndices.length / 3).toBe(200);
   });
+
+  it('partitions a single triangle mesh into exactly 1 meshlet', () => {
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    const indices = new Uint32Array([0, 1, 2]);
+    const { meshlets } = MeshPartitioner.partition(positions, indices);
+    expect(meshlets.length).toBe(1);
+    expect(meshlets[0].triangleCount).toBe(1);
+  });
 });
