@@ -21,3 +21,7 @@ export class CullingEfficiency {
     };
   }
 }
+
+export function estimateLodTransitionTriangles(baseTriangles: number, lodLevel: number): number {
+  return Math.floor(baseTriangles / Math.pow(2, lodLevel));
+}
