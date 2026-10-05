@@ -1,6 +1,6 @@
 /**
  * meshlet-culling-wgsl: GPU-Driven Meshlet Cluster Culling in WebGPU & WGSL
- * (c) 2026 nff747 — MIT License
+ * (c) 2026 nff747 — Apache License 2.0
  */
 
 export * from './core/types';

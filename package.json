@@ -1,7 +1,7 @@
 {
   "name": "meshlet-culling-wgsl",
   "version": "1.0.0",
-  "description": "⚡ GPU-Driven Meshlet Cluster Culling, Normal Cone Filtering & Indirect Multi-Draw Engine in WebGPU / WGSL",
+  "description": "\u26a1 GPU-Driven Meshlet Cluster Culling, Normal Cone Filtering & Indirect Multi-Draw Engine in WebGPU / WGSL",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
     "compute-shader"
   ],
   "author": "nff747 <nff747@users.noreply.github.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nff747/meshlet-culling-wgsl.git"
