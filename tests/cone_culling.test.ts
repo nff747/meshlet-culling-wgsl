@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isClusterFacingCamera } from '../src/math/cone_cull';
+import { isClusterFacingCamera, isClusterFacingOrthoView } from '../src/math/cone_cull';
 import { NormalCone, Vec3 } from '../src/core/types';
 
 describe('Normal Cone Backface Culling', () => {
@@ -29,4 +29,21 @@ describe('Normal Cone Backface Culling', () => {
     };
     expect(isClusterFacingCamera(cone, { x: 10, y: 0, z: 0 })).toBe(true);
   });
+
+  it('evaluates orthographic directional view cone culling', () => {
+    const cone: NormalCone = {
+      apex: { x: 0, y: 0, z: 0 },
+      axis: { x: 0, y: 0, z: 1 },
+      angle: 0.05,
+      cutoff: -Math.sin(0.05),
+    };
+
+    // Parallel rays from +Z (facing camera)
+    expect(isClusterFacingOrthoView(cone, { x: 0, y: 0, z: 1 })).toBe(true);
+    // Parallel rays from -Z (facing away)
+    expect(isClusterFacingOrthoView(cone, { x: 0, y: 0, z: -1 })).toBe(false);
+    // Degenerate direction vector fallback
+    expect(isClusterFacingOrthoView(cone, { x: 0, y: 0, z: 0 })).toBe(true);
+  });
 });
+
