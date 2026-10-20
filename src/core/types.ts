@@ -13,6 +13,11 @@ export interface BoundingSphere {
   radius: number;
 }
 
+export interface AABB {
+  min: Vec3;
+  max: Vec3;
+}
+
 export interface NormalCone {
   /** Apex of the bounding cone (origin in mesh local space). */
   apex: Vec3;

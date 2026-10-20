@@ -93,3 +93,53 @@ function distSq(a: Vec3, b: Vec3): number {
   const dx = a.x - b.x, dy = a.y - b.y, dz = a.z - b.z;
   return dx * dx + dy * dy + dz * dz;
 }
+
+import { AABB } from './types';
+
+/**
+ * Computes tight Axis-Aligned Bounding Box (AABB) enclosing vertices.
+ */
+export function computeAABB(vertices: Vec3[]): AABB {
+  if (vertices.length === 0) {
+    return {
+      min: { x: 0, y: 0, z: 0 },
+      max: { x: 0, y: 0, z: 0 }
+    };
+  }
+
+  let minX = vertices[0].x, maxX = vertices[0].x;
+  let minY = vertices[0].y, maxY = vertices[0].y;
+  let minZ = vertices[0].z, maxZ = vertices[0].z;
+
+  for (let i = 1; i < vertices.length; i++) {
+    const v = vertices[i];
+    if (v.x < minX) minX = v.x;
+    if (v.x > maxX) maxX = v.x;
+    if (v.y < minY) minY = v.y;
+    if (v.y > maxY) maxY = v.y;
+    if (v.z < minZ) minZ = v.z;
+    if (v.z > maxZ) maxZ = v.z;
+  }
+
+  return {
+    min: { x: minX, y: minY, z: minZ },
+    max: { x: maxX, y: maxY, z: maxZ }
+  };
+}
+
+/**
+ * Evaluates whether a bounding sphere intersects an axis-aligned bounding box.
+ */
+export function testSphereAABBIntersection(sphere: BoundingSphere, aabb: AABB): boolean {
+  // Find the point on the AABB closest to the sphere center
+  const cx = Math.max(aabb.min.x, Math.min(sphere.center.x, aabb.max.x));
+  const cy = Math.max(aabb.min.y, Math.min(sphere.center.y, aabb.max.y));
+  const cz = Math.max(aabb.min.z, Math.min(sphere.center.z, aabb.max.z));
+
+  const dx = cx - sphere.center.x;
+  const dy = cy - sphere.center.y;
+  const dz = cz - sphere.center.z;
+
+  const distSq = dx * dx + dy * dy + dz * dz;
+  return distSq <= sphere.radius * sphere.radius;
+}
