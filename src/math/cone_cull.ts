@@ -29,3 +29,23 @@ export function isClusterFacingCamera(cone: NormalCone, cameraPos: Vec3): boolea
   // dot >= -sin(cone_angle) = cone.cutoff
   return dot >= cone.cutoff;
 }
+
+/**
+ * Normal cone cluster culling test for orthographic projections or directional views.
+ * @param cone The cluster's normal cone.
+ * @param dirToCamera Normalized vector pointing towards the camera (opposite of forward view direction).
+ * @returns true if cluster is facing towards the camera (VISIBLE), false if culled.
+ */
+export function isClusterFacingOrthoView(cone: NormalCone, dirToCamera: Vec3): boolean {
+  const len = Math.sqrt(dirToCamera.x * dirToCamera.x + dirToCamera.y * dirToCamera.y + dirToCamera.z * dirToCamera.z);
+  if (len < 1e-6) return true;
+
+  const invLen = 1.0 / len;
+  const nx = dirToCamera.x * invLen;
+  const ny = dirToCamera.y * invLen;
+  const nz = dirToCamera.z * invLen;
+
+  const dot = nx * cone.axis.x + ny * cone.axis.y + nz * cone.axis.z;
+  return dot >= cone.cutoff;
+}
+
