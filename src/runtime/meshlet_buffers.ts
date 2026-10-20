@@ -40,3 +40,79 @@ export function createStagingReadbackBuffer(device: GPUDevice, size: number): GP
     usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST,
   });
 }
+
+import { DrawIndexedIndirectArgs } from '../core/types';
+
+/** WebGPU DrawIndexedIndirect structure stride in bytes: 5 * 4 bytes = 20 bytes */
+export const DRAW_INDEXED_INDIRECT_STRIDE_BYTES = 20;
+
+/**
+ * Validates the parameters of a DrawIndexedIndirectArgs struct.
+ */
+export function validateDrawIndexedIndirectArgs(
+  args: DrawIndexedIndirectArgs,
+  maxIndexCount?: number,
+  maxInstances?: number
+): boolean {
+  if (!Number.isInteger(args.indexCount) || args.indexCount < 0) return false;
+  if (!Number.isInteger(args.instanceCount) || args.instanceCount < 0) return false;
+  if (!Number.isInteger(args.firstIndex) || args.firstIndex < 0) return false;
+  if (!Number.isInteger(args.baseVertex) || args.baseVertex < 0) return false;
+  if (!Number.isInteger(args.firstInstance) || args.firstInstance < 0) return false;
+
+  if (maxIndexCount !== undefined && args.indexCount > maxIndexCount) return false;
+  if (maxInstances !== undefined && args.instanceCount > maxInstances) return false;
+
+  return true;
+}
+
+/**
+ * Clamps the instance count of an indirect draw command to a safe ceiling.
+ */
+export function clampIndirectInstanceCount(
+  args: DrawIndexedIndirectArgs,
+  maxInstances: number
+): DrawIndexedIndirectArgs {
+  return {
+    ...args,
+    instanceCount: Math.max(0, Math.min(args.instanceCount, maxInstances))
+  };
+}
+
+/**
+ * Packs multiple DrawIndexedIndirectArgs commands into a consecutive Uint32Array.
+ */
+export function packDrawIndexedIndirectArgs(commands: DrawIndexedIndirectArgs[]): Uint32Array {
+  const u32 = new Uint32Array(commands.length * 5);
+  for (let i = 0; i < commands.length; i++) {
+    const cmd = commands[i];
+    const offset = i * 5;
+    u32[offset + 0] = cmd.indexCount;
+    u32[offset + 1] = cmd.instanceCount;
+    u32[offset + 2] = cmd.firstIndex;
+    u32[offset + 3] = cmd.baseVertex;
+    u32[offset + 4] = cmd.firstInstance;
+  }
+  return u32;
+}
+
+/**
+ * Unpacks a DrawIndexedIndirectArgs struct from a Uint32Array at the given command index.
+ */
+export function unpackDrawIndexedIndirectArgs(
+  u32: Uint32Array,
+  commandIndex: number = 0
+): DrawIndexedIndirectArgs {
+  const offset = commandIndex * 5;
+  if (offset + 5 > u32.length) {
+    throw new RangeError(`Buffer length ${u32.length} insufficient for command at index ${commandIndex}`);
+  }
+  return {
+    indexCount: u32[offset + 0],
+    instanceCount: u32[offset + 1],
+    firstIndex: u32[offset + 2],
+    baseVertex: u32[offset + 3],
+    firstInstance: u32[offset + 4],
+  };
+}
+
