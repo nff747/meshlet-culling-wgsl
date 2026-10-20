@@ -50,4 +50,50 @@ export class Frustum {
     }
     return true;
   }
+
+  /**
+   * Computes signed distance from a 3D point to the specified frustum plane.
+   */
+  public distanceToPlane(idx: number, point: { x: number; y: number; z: number }): number {
+    if (idx < 0 || idx > 5) {
+      throw new RangeError(`Plane index must be between 0 and 5, received ${idx}`);
+    }
+    const offset = idx * 4;
+    return (
+      this.planes[offset] * point.x +
+      this.planes[offset + 1] * point.y +
+      this.planes[offset + 2] * point.z +
+      this.planes[offset + 3]
+    );
+  }
+
+  /**
+   * Returns plane coefficients [nx, ny, nz, d] for the given plane index (0..5).
+   */
+  public getPlane(idx: number): [number, number, number, number] {
+    if (idx < 0 || idx > 5) {
+      throw new RangeError(`Plane index must be between 0 and 5, received ${idx}`);
+    }
+    const offset = idx * 4;
+    return [
+      this.planes[offset],
+      this.planes[offset + 1],
+      this.planes[offset + 2],
+      this.planes[offset + 3],
+    ];
+  }
+
+  /**
+   * Normalizes arbitrary plane coefficients (nx, ny, nz, d).
+   * Returns [0, 0, 0, 0] if normal vector length is zero.
+   */
+  public static normalizePlane(nx: number, ny: number, nz: number, d: number): [number, number, number, number] {
+    const lenSq = nx * nx + ny * ny + nz * nz;
+    if (lenSq < 1e-12) {
+      return [0, 0, 0, 0];
+    }
+    const len = Math.sqrt(lenSq);
+    return [nx / len, ny / len, nz / len, d / len];
+  }
 }
+
