@@ -3,7 +3,7 @@
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-WebGPU%20Visualizer-00f0ff.svg)](https://nff747.github.io/meshlet-culling-wgsl/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-WGSL-blue.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-Apache_2.0-blue)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 A high-performance, GPU-driven **Meshlet Clustering, Frustum Culling, Normal Cone Filtering, and Indirect Multi-Draw** engine implemented in WebGPU and WGSL.
 
@@ -56,7 +56,7 @@ console.log(`Rendered ${results.totalVisibleTriangles} triangles (${results.frus
 
 ## 📄 License
 
-MIT © [nff747](https://github.com/nff747)
+Apache 2.0 © [nff747](https://github.com/nff747)
 
 ## 🧬 Cluster Culling Architecture
 
