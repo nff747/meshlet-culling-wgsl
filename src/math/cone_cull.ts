@@ -49,3 +49,17 @@ export function isClusterFacingOrthoView(cone: NormalCone, dirToCamera: Vec3): b
   return dot >= cone.cutoff;
 }
 
+/**
+ * Calculates the spherical cap solid angle subtended by the normal cone in steradians.
+ * Solid angle = 2 * pi * (1 - cos(semi_angle)).
+ * cutoff = -sin(semi_angle), so cos(semi_angle) = sqrt(1 - cutoff^2) when cutoff <= 0.
+ */
+export function computeConeSolidAngle(cone: NormalCone): number {
+  if (cone.cutoff >= 1.0) return 4.0 * Math.PI;
+  if (cone.cutoff <= -1.0) return 0.0;
+  // cutoff = -sin(theta), so theta = asin(-cutoff)
+  // solid angle = 2 * pi * (1 - cos(theta)) = 2 * pi * (1 - sqrt(1 - cutoff^2))
+  const cosTheta = Math.sqrt(Math.max(0, 1.0 - cone.cutoff * cone.cutoff));
+  return 2.0 * Math.PI * (1.0 - cosTheta);
+}
+
