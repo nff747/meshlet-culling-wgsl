@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isClusterFacingCamera, isClusterFacingOrthoView } from '../src/math/cone_cull';
+import { isClusterFacingCamera, isClusterFacingOrthoView, computeConeSolidAngle } from '../src/math/cone_cull';
 import { NormalCone, Vec3 } from '../src/core/types';
 
 describe('Normal Cone Backface Culling', () => {
@@ -44,6 +44,17 @@ describe('Normal Cone Backface Culling', () => {
     expect(isClusterFacingOrthoView(cone, { x: 0, y: 0, z: -1 })).toBe(false);
     // Degenerate direction vector fallback
     expect(isClusterFacingOrthoView(cone, { x: 0, y: 0, z: 0 })).toBe(true);
+  });
+
+  it('evaluates cone solid angle steradian measurement', () => {
+    const flatCone: NormalCone = {
+      apex: { x: 0, y: 0, z: 0 },
+      axis: { x: 0, y: 0, z: 1 },
+      angle: 0.0,
+      cutoff: 0.0,
+    };
+    // cutoff = 0 -> theta = 0 -> solid angle = 0
+    expect(computeConeSolidAngle(flatCone)).toBeCloseTo(0.0, 5);
   });
 });
 
