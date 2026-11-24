@@ -25,7 +25,7 @@
     "threejs",
     "compute-shader"
   ],
-  "author": "Lunar Paradox <hello@lunarparadox.com>",
+  "author": "Lunar Paradox",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
